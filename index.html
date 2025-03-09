@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz App</title>
+  <!-- <link rel="stylesheet" href="code.css"> -->
+   <style>/* demo  */
+    .demo {
+        position: absolute; /* Position it relative to the parent container */
+        left: 20px; /* Adjust left position */
+        top: 50px; /* Adjust top position */
+        color: white; /* Set text color */
+        font-size: 90px; /* Adjust font size */
+        font-weight: bold;
+        opacity: 0.5; /* Set opacity to 50% */
+        background: rgba(0, 0, 0, 0.3); /* Optional: Add a slight background for visibility */
+        padding: 10px;
+        border-radius: 5px;
+      }@media (max-width: 600px) {
+        .demo {
+          left: 50%; /* Move it to center */
+          top: 20%;
+          transform: translate(-50%, -50%); /* Ensure it's fully centered */
+          text-align: center;
+          width: 80%; /* Optional: Adjust width for better display */
+        }
+      }
+      
+      
+        /* General Styling */
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+        
+      .navbar {
+        display: flex;
+        flex-direction: column;
+        background-color: #333;
+        padding: 10px 20px;
+      }
+      
+      .navbar-upper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .navbar-lower {
+        display: flex;
+        justify-content: center;
+      }
+      
+      .nav-links {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+      }
+      
+      .nav-links li a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+      }
+      
+      /* Hide the menu icon on large screens */
+      .menu-icon {
+        display: none;
+        font-size: 30px;
+        cursor: pointer;
+        color: white;
+      }
+      
+      /* Responsive Styles for Mobile */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none; /* Hide links initially */
+          flex-direction: column;
+          background-color: #ffffff;
+          position: absolute;
+          top: 60px;
+          left: 0;
+          width: 100%;
+          padding: 10px 0;
+          text-align: center;
+        }
+      
+        .nav-links li {
+          padding: 10px;
+        }
+      
+        .menu-icon {
+          display: block; /* Show hamburger icon */
+        }
+      
+        /* Show menu when active */
+        .nav-links.active {
+          display: flex;
+        }
+      }
+        .logo {
+          display: flex;
+          align-items: center;
+        }
+        
+        .logo-img {
+          width: 40px;
+          height: 40px;
+          margin-right: 10px;
+        }
+        
+        .app-name {
+          font-size: 18px;
+          font-weight: bold;
+        }
+        /* Content Placeholder */
+        .content {
+          height:71vh;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+         
+          background-image: url(images/set-bright-school-stationery-orange-wall.jpg);
+          background-size: cover;
+          background-repeat: no-repeat;
+        }
+        
+      /* Home Screen Styling */
+      .home-screen {
+        text-align: center;
+        padding: 20px;
+      }
+      
+      .categories {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      
+      .category-box {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        width: 250px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      
+      .category-box h3 {
+        margin-bottom: 10px;
+        color: #007bff;
+      }
+      
+      .category-box p {
+        font-size: 14px;
+        margin-bottom: 15px;
+        color: #555;
+      }
+      
+      .category-box .start-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      
+      .category-box .start-btn:hover {
+        background-color: #0056b3;
+      }
+      
+      .category-box:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+      /* Footer Styling */
+      .footer {
+        background-color: #f5f5f5;
+        color: #000000;
+        padding: 20px 0;
+        text-align: center;
+        font-size: 14px;
+      }
+      
+      .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .footer-container > div {
+        flex: 1 1 300px;
+        padding: 10px;
+      }
+      
+      .footer h3 {
+        color: #000000;
+        margin-bottom: 10px;
+      }
+      
+      .footer p, .footer ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        line-height: 1.6;
+      }
+      
+      .footer a {
+        color: #000000;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      
+      .footer a:hover {
+        color: #007bff;
+      }
+      
+      .footer-bottom {
+        background-color: #222;
+        padding: 10px 0;
+        margin-top: 20px;
+        font-size: 12px;
+      }
+      
+  
+/* Home Section */
+.hom-screen {
+    position: relative;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .slide.active {
+    opacity: 1;
+  }
+  
+  .welcome-text {
+    z-index: 1;
+  }
+  
+  .welcome-text h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .welcome-text p {
+    font-size: 1.5rem;
+  }
+  
+      </style>
+  <!-- <link rel="stylesheet" href="slideshow.css"> -->
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <!-- Upper Section -->
+    
+    <div class="navbar-upper">
+      <div class="logo">
+        <img src="/images/logo1.png" alt="Quiz Logo" class="logo-img">
+        <span class="app-name"><a style="color: rgb(103, 105, 106); text-decoration: none;" href="/">Quiz Web App</a></span>
+      </div>
+    </div>
+    
+    <!-- <div class="menu-icon" onclick="toggleMenu()">&#9776;</div> -->
+    <!-- Lower Section -->
+    <div class="navbar-lower">
+      <center>
+      <ul class="nav-links">
+        <!-- Updated link to point to the section with id "categories" -->
+        <li><a href="#home-screen">Categories</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="help.html">Help</a></li>
+        <li><a href="quiz_add.html">Add Quiz</a></li>
+      </ul></center>
+    </div>
+  </nav>
+
+  <!-- Content Placeholder -->
+  <section class="hom-screen">
+    <div class="slideshow">
+      <!-- <img src="images/quizwebapplicationbackgroundimage.jpg" alt="Quiz Image 1" class="slide"> -->
+      <img src="images/set-bright-school-stationery-orange-wall.webp" alt="Quiz Image 2" >
+      <!-- <img src="images/yellow-question-mark.jpg" alt="Quiz Image 3" > -->
+    </div>
+    <div class="welcome-text">
+      <div class="demo">demo</div>
+      <h1>Welcome to the Quiz App</h1>
+      <p id="home-screen">Explore categories and challenge yourself with exciting quizzes!</p>
+    </div>
+  </section>
+
+  <!-- Home Screen Content -->
+  <div class="home-screen" >
+    <p>Select a category to start your quiz!</p>
+    
+    <div class="categories" id="categories">
+      <div class="category-box">
+        <h3>C Language</h3>
+        <p>Test your knowledge of the basics of the C programming language.</p>
+        <a href="/test.html?category=c" class="start-btn">Start Quiz</a>
+      </div>
+      
+      <div class="category-box">
+        <h3>Python</h3>
+        <p>Explore concepts of Python, from basics to advanced levels.</p>
+        <a href="/test.html?category=python" class="start-btn">Start Quiz</a>
+      </div>
+      
+      <div class="category-box">
+        <h3>Java</h3>
+        <p>Dive into the object-oriented world of Java programming.</p>
+        <a href="/test.html?category=java" class="start-btn">Start Quiz</a>
+      </div>
+      
+      <div class="category-box">
+        <h3>JavaScript</h3>
+        <p>Master the language of the web and enhance your frontend skills.</p>
+        <a href="/test.html?category=javascript" class="start-btn">Start Quiz</a>
+      </div>
+      
+      <div class="category-box">
+        <h3>DSA</h3>
+        <p>Challenge yourself with Data Structures and Algorithms quizzes.</p>
+        <a href="/test.html?category=dsa" class="start-btn">Start Quiz</a>
+      </div>
+      
+      <div class="category-box">
+        <h3>C++</h3>
+        <p>Test your skills in C++ programming, from syntax to STL.</p>
+        <a href="/test.html?category=cpp" class="start-btn">Start Quiz</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- About Section -->
+      <div class="footer-about">
+        <h3>About Quiz Web App</h3>
+        <p>Your go-to platform for testing and enhancing your knowledge through fun and interactive quizzes.</p>
+      </div>
+      
+      <!-- Contact Section -->
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <ul>
+          <li>Email: <a href="mailto:pruthvipatil058@gmail.com">pruthvipatil0058@gmail.com</a></li>
+          <li>Email: <a href="mailto:pavan59@gmail.com">pavan59@gmail.com</a></li>
+          <li>Phone: <a href="tel:+7276053747">+7276053747</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#categories">Categories</a></li>
+          <li><a href="#leaderboard">Leaderboard</a></li>
+          <li><a href="#help">Help</a></li>
+          <li><a href="#add-quiz">Add Quiz</a></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <p style="color: white;">&copy; 2024 Quiz Web App. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    // Check if the page has been loaded before in this session
+    if (!sessionStorage.getItem('pageLoaded')) {
+      // Redirect to '/' if it's the first time the page loads
+      sessionStorage.setItem('pageLoaded', true);
+      if (window.location.pathname !== '/') {
+        window.location.href = '/';
+      }
+    }
+  </script>
+  <!-- <script src="slidesshow.js"></script> -->
+  <script>function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+  }
+  </script>
+</body>
+</html>
